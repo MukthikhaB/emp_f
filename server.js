@@ -12,13 +12,15 @@ const pool = new Pool({
     port: 5432,
     user: "postgres",
     password: "root"
-  });
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static('public'));
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve the 'index.html' file from the 'views' directory
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
